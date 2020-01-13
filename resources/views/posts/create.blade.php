@@ -34,7 +34,7 @@
                     @endif
                 </div>
                 <div class="mt-5">
-                    <a href="{{route('top')}}" class="btn btn-secondary">キャンセル
+                    <a href="{{route('index')}}" class="btn btn-secondary">キャンセル
                     </a>
                     <button class="btn btn-primary" type="submit">投稿する</button>
                 </div>

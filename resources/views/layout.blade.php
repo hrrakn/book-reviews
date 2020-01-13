@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>本屋レビューサイト</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +16,10 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 
 <body>
@@ -39,7 +41,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a href="{{ url('') }}" class="nav-link">レビューを見る</a>
+                        <a href="{{ route('reviews') }}" class="nav-link">レビューを見る</a>
                     </li>
                     <!-- Authentication Links -->
                     @guest
@@ -78,6 +80,7 @@
     <div>
         @yield('content')
     </div>
+    <footer></footer>
 </body>
 
 </html>
