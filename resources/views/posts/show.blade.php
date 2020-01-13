@@ -1,16 +1,18 @@
 @extends('layout')
 
 @section('content')
+<input type="hidden" name="user_id" value="{{ $authUser->id }}">
 <div class="container pt-5 mt-5">
     <div class="border p-4">
         <div class="mb-4 text-right">
+            @if($authUser->id === $post->user_id)
             <a href="{{route('posts.edit', ['post' => $post])}}" class="btn btn-danger">編集する</a>
-
             <form style="display: inline-block;" method="POST" action="{{route('posts.destroy', ['post' => $post])}}">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-primary">削除する</button>
             </form>
+            @endif
         </div>
         <h1 class="h5 mb-4">
             {{$post->title}}
@@ -53,6 +55,7 @@
             @empty
             <p>コメントはまだありません。</p>
             @endforelse
+
         </section>
     </div>
 </div>
