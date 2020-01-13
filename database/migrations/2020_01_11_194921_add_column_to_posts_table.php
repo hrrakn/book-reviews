@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class AddColumnToPostsTable extends Migration
 {
@@ -16,9 +16,6 @@ class AddColumnToPostsTable extends Migration
         Schema::table('posts', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('user_id')
-                ->references('id')->on('users')
-                ->onDelete('cascade');
         });
     }
 
@@ -30,7 +27,7 @@ class AddColumnToPostsTable extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-            //
+            $table->dropColumn('user_id');
         });
     }
 }

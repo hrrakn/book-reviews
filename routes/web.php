@@ -10,10 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'PostsController@index')->name('top');
+
+use App\Http\Controllers\PostsController;
+
+Route::get('/', 'PostsController@index')->name('index');
 Route::resource('posts', 'PostsController', ['only' => ['create', 'store', 'show', 'edit', 'update', 'destroy']]);
 Route::resource('comments', 'CommentsController', ['only' => ['store']]);
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/reviews', 'PostsController@reviews')->name('reviews');
