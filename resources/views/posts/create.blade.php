@@ -9,7 +9,7 @@
 
         <form method="POST" action="{{route('posts.store')}}">
             @csrf
-
+            <input type="hidden" name="user_id" value="{{$authUser->id}}">
             <fieldset class="mb-4">
                 <div class="form-group">
                     <label for="title">

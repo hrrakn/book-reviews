@@ -14,6 +14,8 @@
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
     <!-- Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <link rel="stylesheet" href=" https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 
@@ -40,16 +42,16 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a href="{{ route('reviews') }}" class="nav-link">レビューを見る</a>
+                        <a href="{{ route('reviews') }}" class="nav-link far fa-comment">レビューを見る</a>
                     </li>
                     <!-- Authentication Links -->
                     @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">ログイン</a>
+                        <a class="nav-link far fa-arrow-alt-circle-right" href="{{ route('login') }}">ログイン</a>
                     </li>
                     @if (Route::has('register'))
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">新規登録</a>
+                        <a class="nav-link far fa-user-circle" href="{{ route('register') }}">新規登録</a>
                     </li>
                     @endif
                     @else
@@ -68,14 +70,11 @@
                             </form>
                         </div>
                     </li>
-
                     @endguest
                 </ul>
             </div>
         </div>
-
     </header>
-
     <div>
         @yield('content')
     </div>

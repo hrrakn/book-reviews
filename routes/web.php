@@ -20,3 +20,4 @@ Route::resource('comments', 'CommentsController', ['only' => ['store']]);
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/reviews', 'PostsController@reviews')->name('reviews');
+Route::get('/bookstore_information', 'PostsController@bookstore')->name('bookstore');

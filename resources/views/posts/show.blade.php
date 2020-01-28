@@ -1,10 +1,14 @@
 @extends('layout')
 
 @section('content')
-<input type="hidden" name="user_id" value="{{ $authUser->id }}">
+
+
 <div class="container pt-5 mt-5">
+
     <div class="border p-4">
+        @if(Auth::check())
         <div class="mb-4 text-right">
+            <input type="hidden" name="user_id" value="{{ $authUser->id }}">
             @if($authUser->id === $post->user_id)
             <a href="{{route('posts.edit', ['post' => $post])}}" class="btn btn-danger">編集する</a>
             <form style="display: inline-block;" method="POST" action="{{route('posts.destroy', ['post' => $post])}}">
@@ -13,7 +17,9 @@
                 <button class="btn btn-primary">削除する</button>
             </form>
             @endif
+
         </div>
+        @endif
         <h1 class="h5 mb-4">
             {{$post->title}}
         </h1>
@@ -55,7 +61,6 @@
             @empty
             <p>コメントはまだありません。</p>
             @endforelse
-
         </section>
     </div>
 </div>

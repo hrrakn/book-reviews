@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Bookstores;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Post;
@@ -10,7 +11,8 @@ class PostsController extends Controller
 {
     public function index()
     {
-        return view('posts.index');
+        $bookstores = Bookstores::with(['category'])->get();
+        return view('posts.index', ['bookstores' => $bookstores]);
     }
 
     public function reviews()
@@ -27,21 +29,28 @@ class PostsController extends Controller
         return view('reviews', $params);
     }
 
+    public function bookstore()
+    {
+        return view('bookstore');
+    }
+
     public function create()
     {
-        return view('posts.create');
+        $authUser = Auth::user();
+        return view('posts.create', ['authUser' => $authUser]);
     }
 
     public function store(Request $request)
     {
         $params = $request->validate([
             'title' => 'required|max:50',
+            'user_id' => 'required',
             'body' => 'required|max:2000',
         ]);
 
         Post::create($params);
 
-        return redirect()->route('posts.index');
+        return redirect()->route('reviews');
     }
 
     public function show($post_id)
