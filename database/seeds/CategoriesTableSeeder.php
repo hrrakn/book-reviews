@@ -13,15 +13,15 @@ class CategoriesTableSeeder extends Seeder
     {
         DB::table('categories')->insert([
             [
-                'name' => 'Shinkan',
+                'name' => '新刊書店',
                 'slug' => 'shinkan',
             ],
             [
-                'name' => 'Kosho',
+                'name' => '古書店',
                 'slug' => 'kosho',
             ],
             [
-                'name' => 'Bookcafe',
+                'name' => 'ブックカフェ',
                 'slug' => 'bookcafe',
             ],
         ]);

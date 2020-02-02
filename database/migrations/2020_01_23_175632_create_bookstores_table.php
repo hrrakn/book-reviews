@@ -24,7 +24,7 @@ class CreateBookstoresTable extends Migration
             $table->string('img')->nullable();
             $table->timestamps();
 
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

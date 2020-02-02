@@ -7,9 +7,10 @@
             投稿の新規作成
         </h1>
 
-        <form method="POST" action="{{route('posts.store')}}">
+        <form method="POST" action="{{route('posts.store', ['bookstore_id' => $bookstore->id])}}">
             @csrf
             <input type="hidden" name="user_id" value="{{$authUser->id}}">
+            <input type="hidden" name="bookstore_id" value="{{$bookstore->id}}">
             <fieldset class="mb-4">
                 <div class="form-group">
                     <label for="title">
@@ -34,7 +35,7 @@
                     @endif
                 </div>
                 <div class="mt-5">
-                    <a href="{{route('index')}}" class="btn btn-secondary">キャンセル
+                    <a href="{{route('bookstore', ['bookstore' => $bookstore->name])}}" class="btn btn-secondary">キャンセル
                     </a>
                     <button class="btn btn-primary" type="submit">投稿する</button>
                 </div>

@@ -13,8 +13,6 @@ class CommentsController extends Controller
             'post_id' => 'required|exists:posts,id',
             'body' => 'required|max:2000',
         ]);
-
-
         $post = Post::findOrFail($params['post_id']);
         $post->comments()->create($params);
 

@@ -10,8 +10,8 @@
         <div class="mb-4 text-right">
             <input type="hidden" name="user_id" value="{{ $authUser->id }}">
             @if($authUser->id === $post->user_id)
-            <a href="{{route('posts.edit', ['post' => $post])}}" class="btn btn-danger">編集する</a>
-            <form style="display: inline-block;" method="POST" action="{{route('posts.destroy', ['post' => $post])}}">
+            <a href="{{route('posts.edit', ['bookstore_id' => $bookstore->id,'post' => $post])}}" class="btn btn-danger">編集する</a>
+            <form style="display: inline-block;" method="POST" action="{{route('posts.destroy', ['bookstore_id' => $bookstore->id, 'post' => $post])}}">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-primary">削除する</button>
@@ -29,7 +29,7 @@
         <section>
             <h2 class="h5 mb-4">コメント</h2>
 
-            <form action="{{route('comments.store')}}" method="POST" class="mb-4">
+            <form action="{{route('comments.store', ['bookstore_id' => $bookstore->id])}}" method="POST" class="mb-4">
                 @csrf
                 <input type="hidden" name="post_id" value="{{$post->id}}">
                 <div class="form-group">

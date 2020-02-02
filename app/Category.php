@@ -13,6 +13,6 @@ class Category extends Model
 
     public function category()
     {
-        return $this->hasMany('App\Bookstores');
+        return $this->hasMany('App\Bookstore');
     }
 }

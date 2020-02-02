@@ -9,7 +9,7 @@
                 <h1 class="home__copy mb-4 text-light">本屋巡りを楽しくサポート</h1>
                 <p class="text-light">あなたのお気に入りの本屋さんを紹介できる、本屋専門レビューサイトです。
                 </p>
-                <div class="home__search-form mx-auto" style="width:200px;">
+                <!-- <div class="home__search-form mx-auto" style="width:200px;">
 
                     <div class="row justify-content-center">
                         <div class="card-body card-body-top p-2">
@@ -76,7 +76,7 @@
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <a href="{{ route('reviews') }}" class="btn btn-primary mt-4">みんなのレビューをみる</a>
             </div>
         </div>
@@ -96,7 +96,36 @@
         @foreach ($bookstores as $bookstore)
         @if($bookstore->category_id === 1)
         <div class="column">
-            <a href="{{route('bookstore', ['bookstore' => $bookstore])}}" class="text-decoration-none">
+            <a href="{{route('bookstore', ['bookstore' => $bookstore->name])}}" class="text-decoration-none">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <img src=" {{ $bookstore->img }}" alt="img">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <p class="is-size-4"> {{ $bookstore->name }}</p>
+                            <p>住所：{{ $bookstore->place }}</p>
+                            <p>営業：{{ $bookstore->time }}</p>
+                            <a href="{{$bookstore->url}}" target="blank">{{$bookstore->url}}</a>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        @endif
+        @endforeach
+    </div>
+    <div class="tag is-medium is-link is-light mb-3">
+        古書店
+    </div>
+    <div class="columns text-center is-mobile mb-5">
+        @foreach ($bookstores as $bookstore)
+        @if($bookstore->category_id === 2)
+        <div class="column">
+            <a href="{{route('bookstore', ['bookstore' => $bookstore->name])}}" class="text-decoration-none">
                 <div class="card">
                     <div class="card-image">
                         <figure class="image is-4by3">
@@ -119,77 +148,34 @@
         @endforeach
     </div>
     <div class="tag is-medium is-link is-light mb-3">
-        古書店
-    </div>
-    <div class="columns text-center is-mobile mb-5">
-        @foreach ($bookstores as $bookstore)
-        @if($bookstore->category_id === 2)
-        <div class="column">
-            <div class="card">
-                <div class="card-image">
-                    <figure class="image is-4by3">
-                        <img src=" {{ $bookstore->img }}" alt="img">
-                    </figure>
-                </div>
-                <div class="card-content">
-                    <div class="content">
-                        <p class="is-size-4"> {{ $bookstore->name }}</p>
-                        <p>住所：{{ $bookstore->place }}</p>
-                        <p>営業：{{ $bookstore->time }}</p>
-                        <a href="#">{{$bookstore->url}}</a>
-                        <br>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endif
-        @endforeach
-    </div>
-    <div class="tag is-medium is-link is-light mb-3">
         ブックカフェ
     </div>
     <div class="columns text-center is-mobile mb-5">
         @foreach ($bookstores as $bookstore)
         @if($bookstore->category_id === 3)
         <div class="column">
-            <div class="card">
-                <div class="card-image">
-                    <figure class="image is-4by3">
-                        <img src=" {{ $bookstore->img }}" alt="img">
-                    </figure>
-                </div>
-                <div class="card-content">
-                    <div class="content">
-                        <p class="is-size-4"> {{ $bookstore->name }}</p>
-                        <p>住所：{{ $bookstore->place }}</p>
-                        <p>営業：{{ $bookstore->time }}</p>
-                        <a href="#">{{$bookstore->url}}</a>
-                        <br>
+            <a href="{{route('bookstore', ['bookstore' => $bookstore->name])}}" class="text-decoration-none">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <img src=" {{ $bookstore->img }}" alt="img">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <p class="is-size-4"> {{ $bookstore->name }}</p>
+                            <p>住所：{{ $bookstore->place }}</p>
+                            <p>営業：{{ $bookstore->time }}</p>
+                            <a href="#">{{$bookstore->url}}</a>
+                            <br>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
         @endif
         @endforeach
     </div>
 </div>
-<!-- CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
-
-<script>
-    var ctx = document.getElementById("myRaderChart");
-    var myRadarChart = new Chart(ctx, {
-        type: 'radar',
-        data: {
-            labels: ["店の雰囲気", "品揃え", "マニアック度", "おすすめ度"],
-            datasets: [{
-                label: none,
-                data: [5, 4, 3, 3, 3],
-                backgroundColor: 'RGBA(225,95,150, 0.5)',
-                borderColor: 'RGBA(225,95,150, 1)',
-                borderWidth: 2,
-            }]
-        }
-    });
 </script>
 @endsection

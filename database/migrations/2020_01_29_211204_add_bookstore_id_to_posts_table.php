@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnToPostsTable extends Migration
+class AddBookstoreIdToPostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class AddColumnToPostsTable extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('bookstore_id');
+            $table->foreign('bookstore_id')->references('id')->on('bookstores')->onDelete('cascade');
         });
     }
 
@@ -27,7 +27,7 @@ class AddColumnToPostsTable extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-            //
+            $table->dropForeign(['posts_bookstore_id_foreign']);
         });
     }
 }

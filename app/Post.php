@@ -9,7 +9,8 @@ class Post extends Model
     protected $fillable = [
         'title',
         'body',
-        'user_id'
+        'user_id',
+        'bookstore_id'
     ];
 
     public function comments()
@@ -20,5 +21,10 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function bookstore()
+    {
+        return $this->belongsTo('App\Bookstore');
     }
 }
