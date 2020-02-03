@@ -28,4 +28,4 @@ Route::group(['middleware' => 'auth'], function () {
     });
     Route::get('/{bookstore}', 'BookstoresController@bookstore')->name('bookstore');
 });
-Route::post('bookstore/{bookstore_id}/posts/show/comments', 'CommentsController@store')->name('comments.store');
+Route::post('bookstore/{bookstore_id}/posts/{post}', 'CommentsController@store')->name('comments.store');
