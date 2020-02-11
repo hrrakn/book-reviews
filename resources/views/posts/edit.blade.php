@@ -7,10 +7,11 @@
             投稿の編集
         </h1>
 
-        <form method="POST" action="{{route('posts.update',['bookstore_id' => $bookstore->id,'post' => $post])}}">
+        <form method="POST" action="{{route('posts.update',['post' => $post])}}">
             @csrf
             @method('PUT')
-
+            <div><input type="hidden" value="{{$bookstore_id}}" name="bookstore_id">
+                <input type="hidden" value="{{$user_id}}" name="user_id"></div>
             <fieldset class="mb-4">
                 <div class="form-group">
                     <label for="title">タイトル</label>
@@ -32,7 +33,7 @@
                     @endif
                 </div>
                 <div class="mt-5">
-                    <a href="{{route('posts.show',['bookstore_id' => $bookstore->id, 'post' => $post])}}" class="btn btn-secondary">キャンセル</a>
+                    <a href="{{route('posts.show',['post' => $post])}}" class="btn btn-secondary">キャンセル</a>
                     <button class="btn btn-primary" type="submit">更新する</button>
                 </div>
             </fieldset>

@@ -10,8 +10,8 @@
         <div class="mb-4 text-right">
             <input type="hidden" name="user_id" value="{{ $authUser->id }}">
             @if($authUser->id === $post->user_id)
-            <a href="{{route('posts.edit', ['bookstore_id' => $bookstore->id,'post' => $post])}}" class="btn btn-danger">編集する</a>
-            <form style="display: inline-block;" method="POST" action="{{route('posts.destroy', ['bookstore_id' => $bookstore->id, 'post' => $post])}}">
+            <a href="{{route('posts.edit', ['post' => $post])}}" class="btn btn-danger">編集する</a>
+            <form style="display: inline-block;" method="POST" action="{{route('posts.destroy', ['post' => $post])}}">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-primary">削除する</button>
@@ -29,9 +29,8 @@
         <section>
             <h2 class="h5 mb-4">コメント</h2>
 
-            <form action="{{route('comments.store', ['bookstore_id' => $bookstore->id])}}" method="POST" class="mb-4">
+            <form method="POST" action="{{route('comments.store', ['post_id' => $post->id])}}" class="mb-4">
                 @csrf
-                <input type="hidden" name="post_id" value="{{$post->id}}">
                 <div class="form-group">
                     <label for="body">本文</label>
                     <textarea name="body" id="body" rows="4" class="form-control {{$errors->has('body') ? 'is-invalid' : ''}}">{{old('body')}}</textarea>
@@ -48,7 +47,6 @@
                     </button>
                 </div>
             </form>
-
             @forelse($post->comments as $comment)
             <div class="border-top p-4">
                 <time class="text-secondary">

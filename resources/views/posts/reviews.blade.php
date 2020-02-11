@@ -13,11 +13,11 @@
             <p class="card-text">
                 {!! nl2br(e(Str::limit($post->body, 200))) !!}
             </p>
-            <a href="{{route('posts.show',  ['bookstore_id' => $bookstore->id, 'post' => $post])}}" class="card-link">続きを読む</a>
+            <a href="{{route('posts.show',  ['post' => $post])}}" class="card-link">続きを読む</a>
         </div>
         <div class="card-footer">
             <span class="mr-4">
-                {{$bookstore->name}}
+                {{$post->bookstore->name}}
             </span>
             <span class="mr-4">
                 投稿者:{{$authUser->name}}

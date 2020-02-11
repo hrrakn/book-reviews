@@ -11,21 +11,17 @@
 |
 */
 
-use App\Http\Controllers\PostsController;
 
 Route::get('/', 'BookstoresController@index')->name('index');
 
-// Route::resource('comments', 'CommentsController', ['only' => ['store']]);
-Route::resource('bookstores', 'BookstoresController', ['only' => ['bookstore']]);
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/reviews', 'PostsController@reviews')->name('reviews');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::prefix('bookstore/{bookstore_id}')->group(function () {
-        Route::resource('posts', 'PostsController', ['only' => ['create', 'store', 'show', 'edit', 'update', 'destroy']]);
-    });
+    Route::resource('posts', 'PostsController', ['only' => ['create', 'store', 'show', 'edit', 'update', 'destroy']]);
+    Route::resource('comments', 'CommentsController', ['only' => ['store']]);
     Route::get('/{bookstore}', 'BookstoresController@bookstore')->name('bookstore');
 });
-Route::post('bookstore/{bookstore_id}/posts/{post}', 'CommentsController@store')->name('comments.store');
+// Route::post('bookstore/{bookstore_id}/posts/{posts}', 'CommentsController@store')->name('comments.store');

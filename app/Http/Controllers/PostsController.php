@@ -10,31 +10,28 @@ use Illuminate\Support\Facades\DB;
 
 class PostsController extends Controller
 {
-    public function reviews($id)
+    public function reviews()
     {
         $posts = Post::with(['comments'])->orderBy('created_at', 'desc')->paginate(10);
-        $bookstore = Bookstore::where('id', $id)->firstOrFail();
+        $bookstore = Bookstore::get();
         $authUser = Auth::user();
-        $item = Post::with('user')->get();
 
         $params = [
             'posts' => $posts,
             'authUser' => $authUser,
             'bookstore' => $bookstore,
-            'items' => $item,
         ];
-        return view('reviews', $params);
+        return view('posts.reviews', $params);
     }
 
-    public function create($id)
+    public function create()
     {
+        $bookstore = Bookstore::findOrFail($_GET['bookstore_id']);
         $authUser = Auth::user();
-        $bookstore = Bookstore::where('id', $id)->firstOrFail();
-        $params = [
-            'authUser' => $authUser,
-            'bookstore' => $bookstore,
-        ];
-        return view('posts.create', $params);
+        return view('posts.create', [
+            'bookstore_id' => $bookstore->id,
+            'user_id' => $authUser->id
+        ]);
     }
 
     public function store(Request $request)
@@ -51,10 +48,10 @@ class PostsController extends Controller
         return redirect()->route('bookstore', ['bookstore' => $bookstore->name]);
     }
 
-    public function show($id, $post_id)
+    public function show($post_id)
     {
         $post = Post::findOrFail($post_id);
-        $bookstore = Bookstore::where('id', $id)->firstOrFail();
+        $bookstore = Bookstore::findOrFail($post->bookstore_id);
         $authUser = Auth::user();
         $params = [
             'post' => $post,
@@ -64,44 +61,45 @@ class PostsController extends Controller
         return view('posts.show', $params);
     }
 
-    public function edit($id, $post_id)
+    public function edit($post_id)
     {
         $post = Post::findOrFail($post_id);
-        $bookstore = Bookstore::where('id', $id)->firstOrFail();
+        $authUser = Auth::user();
         return view('posts.edit', [
             'post' => $post,
-            'bookstore' => $bookstore,
+            'bookstore_id' => $post->bookstore_id,
+            'user_id' => $authUser->id,
         ]);
     }
 
-    public function update($id, $post_id, Request $request)
+    public function update($post_id, Request $request)
     {
         $params = $request->validate([
             'title' => 'required|max:50',
+            'user_id' => 'required',
             'body' => 'required|max:2000',
+            'bookstore_id' => 'required|exists:bookstores,id'
         ]);
-
         $post = Post::findOrFail($post_id);
-        $bookstore = Bookstore::where('id', $id)->firstOrFail();
         $post->fill($params)->save();
+        $bookstore = Bookstore::findOrFail($params['bookstore_id']);
+        $authUser = Auth::user();
         return redirect()->route('posts.show', [
             'post' => $post,
             'bookstore' => $bookstore,
+            'authUser' => $authUser,
         ]);
     }
 
-    public function destroy($id, $post_id)
+    public function destroy($post_id)
     {
         $post = Post::findOrFail($post_id);
-        $bookstore = Bookstore::where('id', $id)->firstOrFail();
+        $bookstore = Bookstore::findOrFail($post->bookstore_id);
         DB::transaction(function () use ($post) {
             $post->comments()->delete();
             $post->delete();
         });
 
-        return redirect()->route('bookstore', [
-            'post' => $post,
-            'bookstore' => $bookstore,
-        ]);
+        return redirect()->route('bookstore', ['bookstore' => $bookstore->name]);
     }
 }
