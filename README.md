@@ -8,10 +8,3 @@
 - Bulma
 - GitHub
 
-## 実行方法
-```
-$ git clone https://github.com/hrrakn/bookstore-reviews.git
-$ cd bookstore-reviews
-$ php artisan serve
-```
-http://127.0.0.1:8000/
