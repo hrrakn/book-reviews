@@ -50,11 +50,9 @@
             </div>
             @endif
             @endforeach
-            @if($post->bookstore_id === $bookstore->id)
             <div class="d-flex justify-content-center mb-5">
                 {{$posts->links()}}
             </div>
-            @endif
         </div>
     </div>
 
