@@ -20,9 +20,6 @@
                 {{$post->bookstore->name}}
             </span>
             <span class="mr-4">
-                投稿者:{{$authUser->name}}
-            </span>
-            <span class="mr-4">
                 投稿日時: {{ $post->created_at->format('Y.m.d') }}
             </span>
             @if ($post->comments->count())

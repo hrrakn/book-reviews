@@ -17,11 +17,11 @@ Route::get('/', 'BookstoresController@index')->name('index');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/reviews', 'PostsController@reviews')->name('reviews');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('posts', 'PostsController', ['only' => ['create', 'store', 'show', 'edit', 'update', 'destroy']]);
     Route::resource('comments', 'CommentsController', ['only' => ['store']]);
     Route::get('/{bookstore}', 'BookstoresController@bookstore')->name('bookstore');
-    Route::get('/reviews', 'PostsController@reviews')->name('reviews');
 });
 // Route::post('bookstore/{bookstore_id}/posts/{posts}', 'CommentsController@store')->name('comments.store');
