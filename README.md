@@ -3,7 +3,7 @@
 
 ## 使ったもの
 - Laravel
-- Mria DB
+- Maria DB
 - Bootstrap
 - Bulma
 - GitHub
